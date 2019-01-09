@@ -19,6 +19,8 @@ namespace Basic_Game_Template
         //player2 button control keys - DO NOT CHANGE
         Boolean aDown, sDown, dDown, wDown, cDown, vDown, xDown, zDown;
 
+        Boolean playChaser, friend1Chaser, friend2Chaser, friend3Chaser = false;
+
         Font drawFont = new Font("Arial", 16, FontStyle.Bold);
         SolidBrush drawBrush = new SolidBrush(Color.Black);
         SolidBrush winBrush = new SolidBrush(Color.White);
@@ -26,20 +28,17 @@ namespace Basic_Game_Template
         Boolean loseVar = false;
         Boolean winVar = false;
 
-        Boolean herotagger = true;
-        Boolean montagger = false;
-        Boolean mon2tagger = false;
-
         Random randGen = new Random();
 
         int randomValue;
 
         //TODO create your global game variables here
-        int heroX, heroY, heroSize, heroSpeed;
-        int monX, monY, monSize, monSpeed;
-        int mon2X, mon2Y;
-        SolidBrush heroBrush = new SolidBrush(Color.Red);
-        SolidBrush monBrush = new SolidBrush(Color.Blue);
+        int size, runnerSpeed, chaserSpeed;
+        int playX, playY, friend1X, friend1Y, friend2X, friend2Y, friend3X, friend3Y;
+
+        SolidBrush chaserBrush = new SolidBrush(Color.Red);
+        SolidBrush runnerBrush = new SolidBrush(Color.Blue);
+
         public GameScreen()
         {
             InitializeComponent();
@@ -50,18 +49,22 @@ namespace Basic_Game_Template
         {
             //TODO - setup all your initial game values here. Use this method
             // each time you restart your game to reset all values.
-            heroX = 100;
-            heroY = 100;
-            heroSize = 20;
-            heroSpeed = 5;
+            playX = 100;
+            playY = 100;
 
-            monX = 200;
-            monY = 200;
-            monSize = 20;
-            monSpeed = 3;
+            friend1X = 100;
+            friend1Y = 200;
 
-            mon2X = 300;
-            mon2Y = 300;
+            friend2X = 200;
+            friend2Y = 100;
+
+            friend3X = 200;
+            friend3Y = 200;
+
+            size = 10;
+
+            runnerSpeed = 7;
+            chaserSpeed = 5; 
 
             randomValue = randGen.Next(1, 101);
         }
@@ -148,113 +151,366 @@ namespace Basic_Game_Template
             //TODO move main character 
             if (leftArrowDown == true)
             {
-                heroX = heroX - heroSpeed;
+                playX = playX - chaserSpeed;
 
             }
             if (downArrowDown == true)
             {
-                heroY = heroY + heroSpeed;
+                playY = playY + chaserSpeed;
             }
             if (rightArrowDown == true)
             {
-                heroX = heroX + heroSpeed;
+                playX = playX + chaserSpeed;
             }
             if (upArrowDown == true)
             {
-                heroY = heroY - heroSpeed;
+                playY = playY - chaserSpeed;
             }
 
             //TODO move npc characters
 
-            runnerMethod();
-            runnerMethod2();
 
-            if (heroX <= 0)
+            if (playX <= 0)
             {
-                heroX = 0;
+                playX = 0;
             }
-            if (heroY <= 0)
+            if (playY <= 0)
             {
-                heroY = 0;
+                playY = 0;
             }
-            if (heroX >= 300)
+            if (playX >= 300)
             {
-                heroX = 300;
+                playX = 300;
             }
-            if (heroY >= 300)
+            if (playY >= 300)
             {
-                heroY = 300;
+                playY = 300;
             }
 
-            Rectangle hero = new Rectangle(heroX, heroY, heroSize, heroSize);
-            Rectangle mon = new Rectangle(monX, monY, monSize, monSize);
-            Rectangle mon2 = new Rectangle(mon2X, mon2Y, monSize, monSize);
-
-            Boolean heroMonCollision = hero.IntersectsWith(mon);
-            Boolean monMon2Collision = mon.IntersectsWith(mon2);
-            Boolean heroMon2Collision = hero.IntersectsWith(mon2);
-
-
-            if (heroMonCollision && herotagger == true)
+            if (friend1X <= 0)
             {
-                herotagger = false;
-                montagger = true;
-                taggerMethod();
+                friend1X = 0;
             }
-            else if (heroMonCollision && montagger == true)
+            if (friend1Y <= 0)
             {
-                herotagger = true;
-                montagger = false;
-                runnerMethod();
+                friend1Y = 0;
+            }
+            if (friend1X >= 300)
+            {
+                friend1X = 300;
+            }
+            if (friend1Y >= 300)
+            {
+                friend1Y = 300;
             }
 
-            if (montagger == true)
+            if (friend2X <= 0)
             {
-                taggerMethod();
+                friend2X = 0;
             }
+            if (friend2Y <= 0)
+            {
+                friend2Y = 0;
+            }
+            if (friend2X >= 300)
+            {
+                friend2X = 300;
+            }
+            if (friend2Y >= 300)
+            {
+                friend2Y = 300;
+            }
+
+            if (friend3X <= 0)
+            {
+                friend3X = 0;
+            }
+            if (friend3Y <= 0)
+            {
+                friend3Y = 0;
+            }
+            if (friend3X >= 300)
+            {
+                friend3X = 300;
+            }
+            if (friend3Y >= 300)
+            {
+                friend3Y = 300;
+            }
+
+            Rectangle play = new Rectangle(playX, playY, size, size);
+            Rectangle friend1 = new Rectangle(friend1X, friend1Y, size, size);
+            Rectangle friend2 = new Rectangle(friend2X, friend2Y, size, size);
+            Rectangle friend3 = new Rectangle(friend3X, friend3Y, size, size);
+
+            Boolean playFriend1Collision = play.IntersectsWith(friend1);
+            Boolean playFriend2Collision = play.IntersectsWith(friend2);
+            Boolean playFriend3Collision = play.IntersectsWith(friend3);
+
+            Boolean friend1Friend2Collision = friend1.IntersectsWith(friend2);
+            Boolean friend1Friend3Collision = friend1.IntersectsWith(friend3);
+
+            Boolean friend2Friend3Collision = friend2.IntersectsWith(friend3);
+
+            if (playFriend1Collision && playChaser == true)
+            {
+                playChaser = false;
+                friend1Chaser = true;
+            }
+            else if (playFriend1Collision && friend1Chaser == true)
+            {
+                playChaser = true;
+                friend1Chaser = false;
+            }
+
+            if (playFriend2Collision && playChaser == true)
+            {
+                playChaser = false;
+                friend2Chaser = true;
+            }
+            else if (playFriend2Collision && friend2Chaser == true)
+            {
+                playChaser = true;
+                friend2Chaser = false; 
+            }
+
+            if (playFriend3Collision && playChaser == true)
+            {
+                playChaser = false;
+                friend3Chaser = true;
+            }
+            else if (playFriend3Collision && friend3Chaser == true)
+            {
+                playChaser = true;
+                friend2Chaser = false;
+            }
+
+            if (friend1Friend2Collision && friend1Chaser == true)
+            {
+                friend1Chaser = false;
+                friend2Chaser = true; 
+            }
+            else if (friend1Friend2Collision && friend2Chaser == true)
+            {
+                friend1Chaser = true;
+                friend2Chaser = false;
+            }
+
+            if (friend1Friend3Collision && friend1Chaser == true)
+            {
+                friend1Chaser = false;
+                friend3Chaser = true;
+            }
+            else if (friend1Friend3Collision && friend3Chaser == true)
+            {
+                friend1Chaser = true;
+                friend3Chaser = false;
+            }
+
+            if (friend2Friend3Collision && friend2Chaser == true)
+            {
+                friend2Chaser = false;
+                friend3Chaser = true;
+            }
+            else if (friend2Friend3Collision && friend3Chaser == true)
+            {
+                friend2Chaser = true;
+                friend3Chaser = false;
+            }
+
+            if (friend1Chaser == true) { friend1chaserMethod(); }
             else
             {
-                runnerMethod();
+                if (playChaser == true)
+                {
+                    if (friend1X < playX)
+                    {
+                        friend1X = friend1X - runnerSpeed;
+                    }
+                    else
+                    {
+                        friend1X = friend1X + runnerSpeed;
+                    }
+
+                    if (friend1Y < playY)
+                    {
+                        friend1Y = friend1Y - runnerSpeed;
+                    }
+                    else
+                    {
+                        friend1Y = friend1Y + runnerSpeed;
+                    }
+                }
+                else if (friend2Chaser == true)
+                {
+                    if (friend1X < friend2X)
+                    {
+                        friend1X = friend1X - runnerSpeed;
+                    }
+                    else
+                    {
+                        friend1X = friend1X + runnerSpeed;
+                    }
+
+                    if (friend1Y < friend2Y)
+                    {
+                        friend1Y = friend1Y - runnerSpeed;
+                    }
+                    else
+                    {
+                        friend1Y = friend1Y + runnerSpeed;
+                    }
+                }
+                else if (friend3Chaser == true)
+                {
+                    if (friend1X < friend3X)
+                    {
+                        friend1X = friend1X - runnerSpeed;
+                    }
+                    else
+                    {
+                        friend1X = friend1X + runnerSpeed;
+                    }
+
+                    if (friend1Y < friend3Y)
+                    {
+                        friend1Y = friend1Y - runnerSpeed;
+                    }
+                    else
+                    {
+                        friend1Y = friend1Y + runnerSpeed;
+                    }
+                }
             }
 
+            if (friend2Chaser == true) { friend2chaserMethod(); }
+            else {
+                if (playChaser == true)
+                {
+                    if (friend2X < playX)
+                    {
+                        friend2X = friend2X - runnerSpeed;
+                    }
+                    else
+                    {
+                        friend2X = friend2X + runnerSpeed;
+                    }
 
-            if (heroMon2Collision && herotagger == true)
-            {
-                herotagger = false;
-                mon2tagger = true;
-                taggerMethod();
-            }
-            else if (heroMonCollision && montagger == true)
-            {
-                herotagger = true;
-                mon2tagger = false;
-                runnerMethod();
+                    if (friend2Y < playY)
+                    {
+                        friend2Y = friend2Y - runnerSpeed;
+                    }
+                    else
+                    {
+                        friend2Y = friend2Y + runnerSpeed;
+                    }
+                }
+                else if (friend2Chaser == true)
+                {
+                    if (friend2X < friend1X)
+                    {
+                        friend2X = friend2X - runnerSpeed;
+                    }
+                    else
+                    {
+                        friend2X = friend2X + runnerSpeed;
+                    }
+
+                    if (friend2Y < friend1Y)
+                    {
+                        friend2Y = friend2Y - runnerSpeed;
+                    }
+                    else
+                    {
+                        friend2Y = friend2Y + runnerSpeed;
+                    }
+                }
+                else if (friend3Chaser == true)
+                {
+                    if (friend2X < friend3X)
+                    {
+                        friend2X = friend2X - runnerSpeed;
+                    }
+                    else
+                    {
+                        friend2X = friend2X + runnerSpeed;
+                    }
+
+                    if (friend2Y < friend3Y)
+                    {
+                        friend2Y = friend2Y - runnerSpeed;
+                    }
+                    else
+                    {
+                        friend2Y = friend2Y + runnerSpeed;
+                    }
+                }
             }
 
-            if (mon2tagger == true)
-            {
-                taggerMethod2();
-            }
-            else
-            {
-                runnerMethod2();
+            if (friend3Chaser == true) { friend3chaserMethod(); }
+            else {
+                if (playChaser == true)
+                {
+                    if (friend3X < playX)
+                    {
+                        friend3X = friend3X - runnerSpeed;
+                    }
+                    else
+                    {
+                        friend3X = friend3X + runnerSpeed;
+                    }
+
+                    if (friend3Y < playY)
+                    {
+                        friend3Y = friend3Y - runnerSpeed;
+                    }
+                    else
+                    {
+                        friend3Y = friend3Y + runnerSpeed;
+                    }
+                }
+                else if (friend2Chaser == true)
+                {
+                    if (friend3X < friend2X)
+                    {
+                        friend3X = friend3X - runnerSpeed;
+                    }
+                    else
+                    {
+                        friend3X = friend3X + runnerSpeed;
+                    }
+
+                    if (friend3Y < friend2Y)
+                    {
+                        friend3Y = friend3Y - runnerSpeed;
+                    }
+                    else
+                    {
+                        friend3Y = friend3Y + runnerSpeed;
+                    }
+                }
+                else if (friend3Chaser == true)
+                {
+                    if (friend3X < friend1X)
+                    {
+                        friend3X = friend3X - runnerSpeed;
+                    }
+                    else
+                    {
+                        friend3X = friend3X + runnerSpeed;
+                    }
+
+                    if (friend3Y < friend1Y)
+                    {
+                        friend3Y = friend3Y - runnerSpeed;
+                    }
+                    else
+                    {
+                        friend3Y = friend3Y + runnerSpeed;
+                    }
+                }
             }
 
-
-            if (monMon2Collision && montagger == true)
-            {
-                montagger = false;
-                mon2tagger = true; 
-            }
-            else if (monMon2Collision && mon2tagger == true)
-            {
-                montagger = true;
-                mon2tagger = false;
-            }
-            
-            //TODO collisions checks 
-
-            //calls the GameScreen_Paint method to draw the screen.
             Refresh();
         }
 
@@ -264,100 +520,218 @@ namespace Basic_Game_Template
         {
             //draw rectangle to screen
 
-            e.Graphics.FillRectangle(heroBrush, heroX, heroY, heroSize, heroSize);
-            e.Graphics.FillRectangle(monBrush, monX, monY, monSize, monSize);
-            e.Graphics.FillRectangle(monBrush, mon2X, mon2Y, monSize, monSize);
+            e.Graphics.FillRectangle(chaserBrush, playX, playY, size, size);
+            e.Graphics.FillRectangle(runnerBrush, friend1X, friend1Y, size, size);
+            e.Graphics.FillRectangle(runnerBrush, friend2X, friend2Y, size, size);
+            e.Graphics.FillRectangle(runnerBrush, friend3X, friend3Y, size, size);
         }
 
-        public void runnerMethod()
+        public void friend1runnerMethod()
         {
             SolidBrush tagBrush = new SolidBrush(Color.Blue);
 
             //Moving
-            if (monX < heroX)
+            if (playChaser == true)
             {
-                monX = monX - monSpeed;
-            }
-            else
-            {
-                monX = monX + monSpeed;
-            }
+                if (friend1X < playX)
+                {
+                    friend1X = friend1X - runnerSpeed;
+                }
+                else
+                {
+                    friend1X = friend1X + runnerSpeed;
+                }
 
-            if (monY < heroY)
-            {
-                monY = monY - monSpeed;
+                if (friend1Y < playY)
+                {
+                    friend1Y = friend1Y - runnerSpeed;
+                }
+                else
+                {
+                    friend1Y = friend1Y + runnerSpeed;
+                }
             }
-            else
+            else if (friend2Chaser == true)
             {
-                monY = monY + monSpeed;
-            }
+                if (friend1X < friend2X)
+                {
+                    friend1X = friend1X - runnerSpeed;
+                }
+                else
+                {
+                    friend1X = friend1X + runnerSpeed;
+                }
 
-            //Stopping it from going off the page
-            if (monX <= 0)
-            {
-                monX = 0;
+                if (friend1Y < friend2Y)
+                {
+                    friend1Y = friend1Y - runnerSpeed;
+                }
+                else
+                {
+                    friend1Y = friend1Y + runnerSpeed;
+                }
             }
-            if (monY <= 0)
+            else if (friend3Chaser == true)
             {
-                monY = 0;
-            }
-            if (monX >= 300)
-            {
-                monX = 300;
-            }
-            if (monY >= 300)
-            {
-                monY = 300;
+                if (friend1X < friend3X)
+                {
+                    friend1X = friend1X - runnerSpeed;
+                }
+                else
+                {
+                    friend1X = friend1X + runnerSpeed;
+                }
+
+                if (friend1Y < friend3Y)
+                {
+                    friend1Y = friend1Y - runnerSpeed;
+                }
+                else
+                {
+                    friend1Y = friend1Y + runnerSpeed;
+                }
             }
         }
 
-        public void runnerMethod2()
+        public void friend2runnerMethod()
         {
             SolidBrush tagBrush = new SolidBrush(Color.Blue);
 
             //Moving
-            if (monX < heroX)
+            if (playChaser == true)
             {
-                monX = monX - monSpeed;
-            }
-            else
-            {
-                monX = monX + monSpeed;
-            }
+                if (friend2X < playX)
+                {
+                    friend2X = friend2X - runnerSpeed;
+                }
+                else
+                {
+                    friend2X = friend2X + runnerSpeed;
+                }
 
-            if (monY < heroY)
-            {
-                monY = monY - monSpeed;
+                if (friend2Y < playY)
+                {
+                    friend2Y = friend2Y - runnerSpeed;
+                }
+                else
+                {
+                    friend2Y = friend2Y + runnerSpeed;
+                }
             }
-            else
+            else if (friend2Chaser == true)
             {
-                monY = monY + monSpeed;
-            }
+                if (friend2X < friend1X)
+                {
+                    friend2X = friend2X - runnerSpeed;
+                }
+                else
+                {
+                    friend2X = friend2X + runnerSpeed;
+                }
 
-            //Stopping it from going off the page
-            if (monX <= 0)
-            {
-                monX = 0;
+                if (friend2Y < friend1Y)
+                {
+                    friend2Y = friend2Y - runnerSpeed;
+                }
+                else
+                {
+                    friend2Y = friend2Y + runnerSpeed;
+                }
             }
-            if (monY <= 0)
+            else if (friend3Chaser == true)
             {
-                monY = 0;
-            }
-            if (monX >= 300)
-            {
-                monX = 300;
-            }
-            if (monY >= 300)
-            {
-                monY = 300;
+                if (friend2X < friend3X)
+                {
+                    friend2X = friend2X - runnerSpeed;
+                }
+                else
+                {
+                    friend2X = friend2X + runnerSpeed;
+                }
+
+                if (friend2Y < friend3Y)
+                {
+                    friend2Y = friend2Y - runnerSpeed;
+                }
+                else
+                {
+                    friend2Y = friend2Y + runnerSpeed;
+                }
             }
         }
 
-        public void taggerMethod()
+        public void friend3runnerMethod()
+        {
+            SolidBrush tagBrush = new SolidBrush(Color.Blue);
+
+            //Moving
+            if (playChaser == true)
+            {
+                if (friend3X < playX)
+                {
+                    friend3X = friend3X - runnerSpeed;
+                }
+                else
+                {
+                    friend3X = friend3X + runnerSpeed;
+                }
+
+                if (friend3Y < playY)
+                {
+                    friend3Y = friend3Y - runnerSpeed;
+                }
+                else
+                {
+                    friend3Y = friend3Y + runnerSpeed;
+                }
+            }
+            else if (friend2Chaser == true)
+            {
+                if (friend3X < friend2X)
+                {
+                    friend3X = friend3X - runnerSpeed;
+                }
+                else
+                {
+                    friend3X = friend3X + runnerSpeed;
+                }
+
+                if (friend3Y < friend2Y)
+                {
+                    friend3Y = friend3Y - runnerSpeed;
+                }
+                else
+                {
+                    friend3Y = friend3Y + runnerSpeed;
+                }
+            }
+            else if (friend3Chaser == true)
+            {
+                if (friend3X < friend1X)
+                {
+                    friend3X = friend3X - runnerSpeed;
+                }
+                else
+                {
+                    friend3X = friend3X + runnerSpeed;
+                }
+
+                if (friend3Y < friend1Y)
+                {
+                    friend3Y = friend3Y - runnerSpeed;
+                }
+                else
+                {
+                    friend3Y = friend3Y + runnerSpeed;
+                }
+            }
+        }
+
+        public void friend1chaserMethod()
         {
             //Variables
-            int heroLoc = heroX + heroY;
-            int mon2Loc = monX + monY;
+            int heroLoc = playX + playY;
+            int mon2Loc = friend1X + friend1Y;
 
             //Moving
             int heroVar1 = heroLoc - mon2Loc;
@@ -365,71 +739,71 @@ namespace Basic_Game_Template
 
             if (heroVar1 > mon2Var1)
             {
-                if (mon2X < monX)
+                if (friend2X < friend1X)
                 {
-                    monX = monX + monSpeed + 2;
+                    friend1X = friend1X + runnerSpeed + 2;
                 }
                 else
                 {
-                    monX = monX - monSpeed - 2;
+                    friend1X = friend1X - runnerSpeed - 2;
                 }
 
-                if (mon2Y < monY)
+                if (friend2Y < friend1Y)
                 {
-                    monY = monY + monSpeed + 2;
+                    friend1Y = friend1Y + runnerSpeed + 2;
                 }
                 else
                 {
-                    monY = monY - monSpeed - 2;
+                    friend1Y = friend1Y - runnerSpeed - 2;
                 }
             }
             else if (heroVar1 < mon2Var1)
             {
-                if (mon2X < heroX)
+                if (friend2X < playX)
                 {
-                    monX = monX + monSpeed + 2;
+                    friend1X = friend1X + runnerSpeed + 2;
                 }
                 else
                 {
-                    monX = monX - monSpeed - 2;
+                    friend1X = friend1X - runnerSpeed - 2;
                 }
 
-                if (mon2Y < heroY)
+                if (friend2Y < playY)
                 {
-                    monY = monY + monSpeed + 2;
+                    friend1Y = friend1Y + runnerSpeed + 2;
                 }
                 else
                 {
-                    monY = monY - monSpeed - 2;
+                    friend1Y = friend1Y - runnerSpeed - 2;
                 }
             }
             else
             {
-                if (mon2X < heroX)
+                if (friend2X < playX)
                 {
-                    monX = monX + monSpeed + 2;
+                    friend1X = friend1X + runnerSpeed + 2;
                 }
                 else
                 {
-                    monX = monX - monSpeed - 2;
+                    friend1X = friend1X - runnerSpeed - 2;
                 }
 
-                if (mon2Y < heroY)
+                if (friend2Y < playY)
                 {
-                    monY = monY + monSpeed + 2;
+                    friend1Y = friend1Y + runnerSpeed + 2;
                 }
                 else
                 {
-                    monY = monY - monSpeed - 2;
+                    friend1Y = friend1Y - runnerSpeed - 2;
                 }
             }
         }
 
-        public void taggerMethod2()
+        public void friend2chaserMethod()
         {
             //Variables
-            int heroLoc = heroX + heroY;
-            int mon2Loc = monX + monY;
+            int heroLoc = playX + playY;
+            int mon2Loc = friend1X + friend1Y;
 
             //Moving
             int heroVar1 = heroLoc - mon2Loc;
@@ -437,62 +811,134 @@ namespace Basic_Game_Template
 
             if (heroVar1 > mon2Var1)
             {
-                if (mon2X < monX)
+                if (friend2X < friend1X)
                 {
-                    monX = monX + monSpeed + 2;
+                    friend1X = friend1X + runnerSpeed + 2;
                 }
                 else
                 {
-                    monX = monX - monSpeed - 2;
+                    friend1X = friend1X - runnerSpeed - 2;
                 }
 
-                if (mon2Y < monY)
+                if (friend2Y < friend1Y)
                 {
-                    monY = monY + monSpeed + 2;
+                    friend1Y = friend1Y + runnerSpeed + 2;
                 }
                 else
                 {
-                    monY = monY - monSpeed - 2;
+                    friend1Y = friend1Y - runnerSpeed - 2;
                 }
             }
             else if (heroVar1 < mon2Var1)
             {
-                if (mon2X < heroX)
+                if (friend2X < playX)
                 {
-                    monX = monX + monSpeed + 2;
+                    friend1X = friend1X + runnerSpeed + 2;
                 }
                 else
                 {
-                    monX = monX - monSpeed - 2;
+                    friend1X = friend1X - runnerSpeed - 2;
                 }
 
-                if (mon2Y < heroY)
+                if (friend2Y < playY)
                 {
-                    monY = monY + monSpeed + 2;
+                    friend1Y = friend1Y + runnerSpeed + 2;
                 }
                 else
                 {
-                    monY = monY - monSpeed - 2;
+                    friend1Y = friend1Y - runnerSpeed - 2;
                 }
             }
             else
             {
-                if (mon2X < heroX)
+                if (friend2X < playX)
                 {
-                    monX = monX + monSpeed + 2;
+                    friend1X = friend1X + runnerSpeed + 2;
                 }
                 else
                 {
-                    monX = monX - monSpeed - 2;
+                    friend1X = friend1X - runnerSpeed - 2;
                 }
 
-                if (mon2Y < heroY)
+                if (friend2Y < playY)
                 {
-                    monY = monY + monSpeed + 2;
+                    friend1Y = friend1Y + runnerSpeed + 2;
                 }
                 else
                 {
-                    monY = monY - monSpeed - 2;
+                    friend1Y = friend1Y - runnerSpeed - 2;
+                }
+            }
+        }
+
+        public void friend3chaserMethod()
+        {
+            //Variables
+            int heroLoc = playX + playY;
+            int mon2Loc = friend1X + friend1Y;
+
+            //Moving
+            int heroVar1 = heroLoc - mon2Loc;
+            int mon2Var1 = mon2Loc - heroLoc;
+
+            if (heroVar1 > mon2Var1)
+            {
+                if (friend2X < friend1X)
+                {
+                    friend1X = friend1X + runnerSpeed + 2;
+                }
+                else
+                {
+                    friend1X = friend1X - runnerSpeed - 2;
+                }
+
+                if (friend2Y < friend1Y)
+                {
+                    friend1Y = friend1Y + runnerSpeed + 2;
+                }
+                else
+                {
+                    friend1Y = friend1Y - runnerSpeed - 2;
+                }
+            }
+            else if (heroVar1 < mon2Var1)
+            {
+                if (friend2X < playX)
+                {
+                    friend1X = friend1X + runnerSpeed + 2;
+                }
+                else
+                {
+                    friend1X = friend1X - runnerSpeed - 2;
+                }
+
+                if (friend2Y < playY)
+                {
+                    friend1Y = friend1Y + runnerSpeed + 2;
+                }
+                else
+                {
+                    friend1Y = friend1Y - runnerSpeed - 2;
+                }
+            }
+            else
+            {
+                if (friend2X < playX)
+                {
+                    friend1X = friend1X + runnerSpeed + 2;
+                }
+                else
+                {
+                    friend1X = friend1X - runnerSpeed - 2;
+                }
+
+                if (friend2Y < playY)
+                {
+                    friend1Y = friend1Y + runnerSpeed + 2;
+                }
+                else
+                {
+                    friend1Y = friend1Y - runnerSpeed - 2;
                 }
             }
         }
