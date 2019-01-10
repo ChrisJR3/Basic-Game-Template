@@ -19,7 +19,10 @@ namespace Basic_Game_Template
         //player2 button control keys - DO NOT CHANGE
         Boolean aDown, sDown, dDown, wDown, cDown, vDown, xDown, zDown;
 
-        Boolean playChaser, friend1Chaser, friend2Chaser, friend3Chaser = false;
+        Boolean playChaser = true;
+        Boolean friend1Chaser = false;
+        Boolean friend2Chaser = false;
+        Boolean friend3Chaser = false;
 
         Font drawFont = new Font("Arial", 16, FontStyle.Bold);
         SolidBrush drawBrush = new SolidBrush(Color.Black);
@@ -33,7 +36,11 @@ namespace Basic_Game_Template
         int randomValue;
 
         //TODO create your global game variables here
-        int size, runnerSpeed, chaserSpeed;
+        int playrunnerSpeed = 4;
+        int friend1runnerSpeed = 4;
+        int friend2runnerSpeed = 3;
+        int friend3runnerSpeed = 2;
+        int chaserSpeed = 5;
         int playX, playY, friend1X, friend1Y, friend2X, friend2Y, friend3X, friend3Y;
 
         SolidBrush chaserBrush = new SolidBrush(Color.Red);
@@ -60,11 +67,6 @@ namespace Basic_Game_Template
 
             friend3X = 200;
             friend3Y = 200;
-
-            size = 10;
-
-            runnerSpeed = 7;
-            chaserSpeed = 5; 
 
             randomValue = randGen.Next(1, 101);
         }
@@ -151,97 +153,309 @@ namespace Basic_Game_Template
             //TODO move main character 
             if (leftArrowDown == true)
             {
-                playX = playX - chaserSpeed;
-
+                playX = playX - playrunnerSpeed;
             }
             if (downArrowDown == true)
             {
-                playY = playY + chaserSpeed;
+                playY = playY + playrunnerSpeed;
             }
             if (rightArrowDown == true)
             {
-                playX = playX + chaserSpeed;
+                playX = playX + playrunnerSpeed;
             }
             if (upArrowDown == true)
             {
-                playY = playY - chaserSpeed;
+                playY = playY - playrunnerSpeed;
             }
 
             //TODO move npc characters
 
+            if (friend1Chaser == true)
+            {
+                friend1chaserMethod();
+            }
+            else if (friend1Chaser == false)
+            {
+                if (playChaser == true)
+                {
+                    if (friend1X > playX + 100 || friend1X < playX + 100)
+                    {
+                        if (friend1X < playX)
+                        {
+                            friend1X = friend1X - friend1runnerSpeed;
+                        }
+                        else
+                        {
+                            friend1X = friend1X + friend1runnerSpeed;
+                        }
+                    }
+                    else if (friend1Y > playY + 100 || friend1Y < playY + 100)
+                    {
+                        if (friend1Y < playY)
+                        {
+                            friend1Y = friend1Y - friend1runnerSpeed;
+                        }
+                        else
+                        {
+                            friend1Y = friend1Y + friend1runnerSpeed;
+                        }
+                    }
+                    else { }
 
-            if (playX <= 0)
+                }
+                else if (friend2Chaser == true)
+                {
+                    if (friend1X > friend2X + 100 || friend1X < friend2X + 100)
+                    {
+                        if (friend1X < friend2X)
+                        {
+                            friend1X = friend1X - friend1runnerSpeed;
+                        }
+                        else
+                        {
+                            friend1X = friend1X + friend1runnerSpeed;
+                        }
+                    }
+                    else if (friend2Y > friend2Y + 100 || friend2Y < friend2Y + 100)
+                    {
+                        if (friend1Y < friend2Y)
+                        {
+                            friend1Y = friend1Y - friend1runnerSpeed;
+                        }
+                        else
+                        {
+                            friend1Y = friend1Y + friend1runnerSpeed;
+                        }
+                    }
+                    else { }
+                }
+                else if (friend3Chaser == true)
+                {
+                    if (friend1X < friend3X)
+                    {
+                        friend1X = friend1X - friend1runnerSpeed;
+                    }
+                    else
+                    {
+                        friend1X = friend1X + friend1runnerSpeed;
+                    }
+                }
+                else if (friend1Y > friend3Y + 100 || friend1Y < friend3Y + 100)
+                {
+                    if (friend1Y < friend3Y)
+                    {
+                        friend1Y = friend1Y - friend1runnerSpeed;
+                    }
+                    else
+                    {
+                        friend1Y = friend1Y + friend1runnerSpeed;
+                    }
+                }
+                else { }
+            }
+
+            if (friend2Chaser == true) { friend2chaserMethod(); }
+            else
+            {
+                if (playChaser == true)
+                {
+                    if (friend2X < playX)
+                    {
+                        friend2X = friend2X - friend2runnerSpeed;
+                    }
+                    else
+                    {
+                        friend2X = friend2X + friend2runnerSpeed;
+                    }
+
+                    if (friend2Y < playY)
+                    {
+                        friend2Y = friend2Y - friend2runnerSpeed;
+                    }
+                    else
+                    {
+                        friend2Y = friend2Y + friend2runnerSpeed;
+                    }
+                }
+                else if (friend2Chaser == true)
+                {
+                    if (friend2X < friend1X)
+                    {
+                        friend2X = friend2X - friend2runnerSpeed;
+                    }
+                    else
+                    {
+                        friend2X = friend2X + friend2runnerSpeed;
+                    }
+
+                    if (friend2Y < friend1Y)
+                    {
+                        friend2Y = friend2Y - friend2runnerSpeed;
+                    }
+                    else
+                    {
+                        friend2Y = friend2Y + friend2runnerSpeed;
+                    }
+                }
+                else if (friend3Chaser == true)
+                {
+                    if (friend2X < friend3X)
+                    {
+                        friend2X = friend2X - friend2runnerSpeed;
+                    }
+                    else
+                    {
+                        friend2X = friend2X + friend2runnerSpeed;
+                    }
+
+                    if (friend2Y < friend3Y)
+                    {
+                        friend2Y = friend2Y - friend2runnerSpeed;
+                    }
+                    else
+                    {
+                        friend2Y = friend2Y + friend2runnerSpeed;
+                    }
+                }
+            }
+
+            if (friend3Chaser == true) { friend3chaserMethod(); }
+            else
+            {
+                if (playChaser == true)
+                {
+                    if (friend3X < playX)
+                    {
+                        friend3X = friend3X - friend3runnerSpeed;
+                    }
+                    else
+                    {
+                        friend3X = friend3X + friend3runnerSpeed;
+                    }
+
+                    if (friend3Y < playY)
+                    {
+                        friend3Y = friend3Y - friend3runnerSpeed;
+                    }
+                    else
+                    {
+                        friend3Y = friend3Y + friend3runnerSpeed;
+                    }
+                }
+                else if (friend2Chaser == true)
+                {
+                    if (friend3X < friend2X)
+                    {
+                        friend3X = friend3X - friend3runnerSpeed;
+                    }
+                    else
+                    {
+                        friend3X = friend3X + friend3runnerSpeed;
+                    }
+
+                    if (friend3Y < friend2Y)
+                    {
+                        friend3Y = friend3Y - friend3runnerSpeed;
+                    }
+                    else
+                    {
+                        friend3Y = friend3Y + friend3runnerSpeed;
+                    }
+                }
+                else if (friend3Chaser == true)
+                {
+                    if (friend3X < friend1X)
+                    {
+                        friend3X = friend3X - friend3runnerSpeed;
+                    }
+                    else
+                    {
+                        friend3X = friend3X + friend3runnerSpeed;
+                    }
+
+                    if (friend3Y < friend1Y)
+                    {
+                        friend3Y = friend3Y - friend3runnerSpeed;
+                    }
+                    else
+                    {
+                        friend3Y = friend3Y + friend3runnerSpeed;
+                    }
+                }
+            }
+
+            if (playX < 0)
             {
                 playX = 0;
             }
-            if (playY <= 0)
+            if (playY < 0)
             {
                 playY = 0;
             }
-            if (playX >= 300)
+            if (playX > 300)
             {
                 playX = 300;
             }
-            if (playY >= 300)
+            if (playY > 300)
             {
                 playY = 300;
             }
 
-            if (friend1X <= 0)
+            if (friend1X < 0)
             {
                 friend1X = 0;
             }
-            if (friend1Y <= 0)
+            if (friend1Y < 0)
             {
                 friend1Y = 0;
             }
-            if (friend1X >= 300)
+            if (friend1X > 300)
             {
                 friend1X = 300;
             }
-            if (friend1Y >= 300)
+            if (friend1Y > 300)
             {
                 friend1Y = 300;
             }
 
-            if (friend2X <= 0)
+            if (friend2X < 0)
             {
                 friend2X = 0;
             }
-            if (friend2Y <= 0)
+            if (friend2Y < 0)
             {
                 friend2Y = 0;
             }
-            if (friend2X >= 300)
+            if (friend2X > 300)
             {
                 friend2X = 300;
             }
-            if (friend2Y >= 300)
+            if (friend2Y > 300)
             {
                 friend2Y = 300;
             }
 
-            if (friend3X <= 0)
+            if (friend3X < 0)
             {
                 friend3X = 0;
             }
-            if (friend3Y <= 0)
+            if (friend3Y < 0)
             {
                 friend3Y = 0;
             }
-            if (friend3X >= 300)
+            if (friend3X > 300)
             {
                 friend3X = 300;
             }
-            if (friend3Y >= 300)
+            if (friend3Y > 300)
             {
                 friend3Y = 300;
             }
 
-            Rectangle play = new Rectangle(playX, playY, size, size);
-            Rectangle friend1 = new Rectangle(friend1X, friend1Y, size, size);
-            Rectangle friend2 = new Rectangle(friend2X, friend2Y, size, size);
-            Rectangle friend3 = new Rectangle(friend3X, friend3Y, size, size);
+            Rectangle play = new Rectangle(playX, playY, 10, 10);
+            Rectangle friend1 = new Rectangle(friend1X, friend1Y, 8, 8);
+            Rectangle friend2 = new Rectangle(friend2X, friend2Y, 10, 10);
+            Rectangle friend3 = new Rectangle(friend3X, friend3Y, 12, 12);
 
             Boolean playFriend1Collision = play.IntersectsWith(friend1);
             Boolean playFriend2Collision = play.IntersectsWith(friend2);
@@ -316,200 +530,7 @@ namespace Basic_Game_Template
             {
                 friend2Chaser = true;
                 friend3Chaser = false;
-            }
-
-            if (friend1Chaser == true) { friend1chaserMethod(); }
-            else
-            {
-                if (playChaser == true)
-                {
-                    if (friend1X < playX)
-                    {
-                        friend1X = friend1X - runnerSpeed;
-                    }
-                    else
-                    {
-                        friend1X = friend1X + runnerSpeed;
-                    }
-
-                    if (friend1Y < playY)
-                    {
-                        friend1Y = friend1Y - runnerSpeed;
-                    }
-                    else
-                    {
-                        friend1Y = friend1Y + runnerSpeed;
-                    }
-                }
-                else if (friend2Chaser == true)
-                {
-                    if (friend1X < friend2X)
-                    {
-                        friend1X = friend1X - runnerSpeed;
-                    }
-                    else
-                    {
-                        friend1X = friend1X + runnerSpeed;
-                    }
-
-                    if (friend1Y < friend2Y)
-                    {
-                        friend1Y = friend1Y - runnerSpeed;
-                    }
-                    else
-                    {
-                        friend1Y = friend1Y + runnerSpeed;
-                    }
-                }
-                else if (friend3Chaser == true)
-                {
-                    if (friend1X < friend3X)
-                    {
-                        friend1X = friend1X - runnerSpeed;
-                    }
-                    else
-                    {
-                        friend1X = friend1X + runnerSpeed;
-                    }
-
-                    if (friend1Y < friend3Y)
-                    {
-                        friend1Y = friend1Y - runnerSpeed;
-                    }
-                    else
-                    {
-                        friend1Y = friend1Y + runnerSpeed;
-                    }
-                }
-            }
-
-            if (friend2Chaser == true) { friend2chaserMethod(); }
-            else {
-                if (playChaser == true)
-                {
-                    if (friend2X < playX)
-                    {
-                        friend2X = friend2X - runnerSpeed;
-                    }
-                    else
-                    {
-                        friend2X = friend2X + runnerSpeed;
-                    }
-
-                    if (friend2Y < playY)
-                    {
-                        friend2Y = friend2Y - runnerSpeed;
-                    }
-                    else
-                    {
-                        friend2Y = friend2Y + runnerSpeed;
-                    }
-                }
-                else if (friend2Chaser == true)
-                {
-                    if (friend2X < friend1X)
-                    {
-                        friend2X = friend2X - runnerSpeed;
-                    }
-                    else
-                    {
-                        friend2X = friend2X + runnerSpeed;
-                    }
-
-                    if (friend2Y < friend1Y)
-                    {
-                        friend2Y = friend2Y - runnerSpeed;
-                    }
-                    else
-                    {
-                        friend2Y = friend2Y + runnerSpeed;
-                    }
-                }
-                else if (friend3Chaser == true)
-                {
-                    if (friend2X < friend3X)
-                    {
-                        friend2X = friend2X - runnerSpeed;
-                    }
-                    else
-                    {
-                        friend2X = friend2X + runnerSpeed;
-                    }
-
-                    if (friend2Y < friend3Y)
-                    {
-                        friend2Y = friend2Y - runnerSpeed;
-                    }
-                    else
-                    {
-                        friend2Y = friend2Y + runnerSpeed;
-                    }
-                }
-            }
-
-            if (friend3Chaser == true) { friend3chaserMethod(); }
-            else {
-                if (playChaser == true)
-                {
-                    if (friend3X < playX)
-                    {
-                        friend3X = friend3X - runnerSpeed;
-                    }
-                    else
-                    {
-                        friend3X = friend3X + runnerSpeed;
-                    }
-
-                    if (friend3Y < playY)
-                    {
-                        friend3Y = friend3Y - runnerSpeed;
-                    }
-                    else
-                    {
-                        friend3Y = friend3Y + runnerSpeed;
-                    }
-                }
-                else if (friend2Chaser == true)
-                {
-                    if (friend3X < friend2X)
-                    {
-                        friend3X = friend3X - runnerSpeed;
-                    }
-                    else
-                    {
-                        friend3X = friend3X + runnerSpeed;
-                    }
-
-                    if (friend3Y < friend2Y)
-                    {
-                        friend3Y = friend3Y - runnerSpeed;
-                    }
-                    else
-                    {
-                        friend3Y = friend3Y + runnerSpeed;
-                    }
-                }
-                else if (friend3Chaser == true)
-                {
-                    if (friend3X < friend1X)
-                    {
-                        friend3X = friend3X - runnerSpeed;
-                    }
-                    else
-                    {
-                        friend3X = friend3X + runnerSpeed;
-                    }
-
-                    if (friend3Y < friend1Y)
-                    {
-                        friend3Y = friend3Y - runnerSpeed;
-                    }
-                    else
-                    {
-                        friend3Y = friend3Y + runnerSpeed;
-                    }
-                }
-            }
+            } 
 
             Refresh();
         }
@@ -520,10 +541,10 @@ namespace Basic_Game_Template
         {
             //draw rectangle to screen
 
-            e.Graphics.FillRectangle(chaserBrush, playX, playY, size, size);
-            e.Graphics.FillRectangle(runnerBrush, friend1X, friend1Y, size, size);
-            e.Graphics.FillRectangle(runnerBrush, friend2X, friend2Y, size, size);
-            e.Graphics.FillRectangle(runnerBrush, friend3X, friend3Y, size, size);
+            e.Graphics.FillRectangle(chaserBrush, playX, playY, 10, 10);
+            e.Graphics.FillRectangle(runnerBrush, friend1X, friend1Y, 8, 8);
+            e.Graphics.FillRectangle(runnerBrush, friend2X, friend2Y, 10, 10);
+            e.Graphics.FillRectangle(runnerBrush, friend3X, friend3Y, 12, 12);
         }
 
         public void friend1runnerMethod()
@@ -535,60 +556,60 @@ namespace Basic_Game_Template
             {
                 if (friend1X < playX)
                 {
-                    friend1X = friend1X - runnerSpeed;
+                    friend1X = friend1X - friend1runnerSpeed;
                 }
                 else
                 {
-                    friend1X = friend1X + runnerSpeed;
+                    friend1X = friend1X + friend1runnerSpeed;
                 }
 
                 if (friend1Y < playY)
                 {
-                    friend1Y = friend1Y - runnerSpeed;
+                    friend1Y = friend1Y - friend1runnerSpeed;
                 }
                 else
                 {
-                    friend1Y = friend1Y + runnerSpeed;
+                    friend1Y = friend1Y + friend1runnerSpeed;
                 }
             }
             else if (friend2Chaser == true)
             {
                 if (friend1X < friend2X)
                 {
-                    friend1X = friend1X - runnerSpeed;
+                    friend1X = friend1X - friend1runnerSpeed;
                 }
                 else
                 {
-                    friend1X = friend1X + runnerSpeed;
+                    friend1X = friend1X + friend1runnerSpeed;
                 }
 
                 if (friend1Y < friend2Y)
                 {
-                    friend1Y = friend1Y - runnerSpeed;
+                    friend1Y = friend1Y - friend1runnerSpeed;
                 }
                 else
                 {
-                    friend1Y = friend1Y + runnerSpeed;
+                    friend1Y = friend1Y + friend1runnerSpeed;
                 }
             }
             else if (friend3Chaser == true)
             {
                 if (friend1X < friend3X)
                 {
-                    friend1X = friend1X - runnerSpeed;
+                    friend1X = friend1X - friend1runnerSpeed;
                 }
                 else
                 {
-                    friend1X = friend1X + runnerSpeed;
+                    friend1X = friend1X + friend1runnerSpeed;
                 }
 
                 if (friend1Y < friend3Y)
                 {
-                    friend1Y = friend1Y - runnerSpeed;
+                    friend1Y = friend1Y - friend1runnerSpeed;
                 }
                 else
                 {
-                    friend1Y = friend1Y + runnerSpeed;
+                    friend1Y = friend1Y + friend1runnerSpeed;
                 }
             }
         }
@@ -602,60 +623,60 @@ namespace Basic_Game_Template
             {
                 if (friend2X < playX)
                 {
-                    friend2X = friend2X - runnerSpeed;
+                    friend2X = friend2X - friend3runnerSpeed;
                 }
                 else
                 {
-                    friend2X = friend2X + runnerSpeed;
+                    friend2X = friend2X + friend3runnerSpeed;
                 }
 
                 if (friend2Y < playY)
                 {
-                    friend2Y = friend2Y - runnerSpeed;
+                    friend2Y = friend2Y - friend3runnerSpeed;
                 }
                 else
                 {
-                    friend2Y = friend2Y + runnerSpeed;
+                    friend2Y = friend2Y + friend3runnerSpeed;
                 }
             }
             else if (friend2Chaser == true)
             {
                 if (friend2X < friend1X)
                 {
-                    friend2X = friend2X - runnerSpeed;
+                    friend2X = friend2X - friend3runnerSpeed;
                 }
                 else
                 {
-                    friend2X = friend2X + runnerSpeed;
+                    friend2X = friend2X + friend3runnerSpeed;
                 }
 
                 if (friend2Y < friend1Y)
                 {
-                    friend2Y = friend2Y - runnerSpeed;
+                    friend2Y = friend2Y - friend3runnerSpeed;
                 }
                 else
                 {
-                    friend2Y = friend2Y + runnerSpeed;
+                    friend2Y = friend2Y + friend3runnerSpeed;
                 }
             }
             else if (friend3Chaser == true)
             {
                 if (friend2X < friend3X)
                 {
-                    friend2X = friend2X - runnerSpeed;
+                    friend2X = friend2X - friend3runnerSpeed;
                 }
                 else
                 {
-                    friend2X = friend2X + runnerSpeed;
+                    friend2X = friend2X + friend3runnerSpeed;
                 }
 
                 if (friend2Y < friend3Y)
                 {
-                    friend2Y = friend2Y - runnerSpeed;
+                    friend2Y = friend2Y - friend3runnerSpeed;
                 }
                 else
                 {
-                    friend2Y = friend2Y + runnerSpeed;
+                    friend2Y = friend2Y + friend3runnerSpeed;
                 }
             }
         }
@@ -669,60 +690,60 @@ namespace Basic_Game_Template
             {
                 if (friend3X < playX)
                 {
-                    friend3X = friend3X - runnerSpeed;
+                    friend3X = friend3X - friend2runnerSpeed;
                 }
                 else
                 {
-                    friend3X = friend3X + runnerSpeed;
+                    friend3X = friend3X + friend2runnerSpeed;
                 }
 
                 if (friend3Y < playY)
                 {
-                    friend3Y = friend3Y - runnerSpeed;
+                    friend3Y = friend3Y - friend2runnerSpeed;
                 }
                 else
                 {
-                    friend3Y = friend3Y + runnerSpeed;
+                    friend3Y = friend3Y + friend2runnerSpeed;
                 }
             }
             else if (friend2Chaser == true)
             {
                 if (friend3X < friend2X)
                 {
-                    friend3X = friend3X - runnerSpeed;
+                    friend3X = friend3X - friend2runnerSpeed;
                 }
                 else
                 {
-                    friend3X = friend3X + runnerSpeed;
+                    friend3X = friend3X + friend2runnerSpeed;
                 }
 
                 if (friend3Y < friend2Y)
                 {
-                    friend3Y = friend3Y - runnerSpeed;
+                    friend3Y = friend3Y - friend2runnerSpeed;
                 }
                 else
                 {
-                    friend3Y = friend3Y + runnerSpeed;
+                    friend3Y = friend3Y + friend2runnerSpeed;
                 }
             }
             else if (friend3Chaser == true)
             {
                 if (friend3X < friend1X)
                 {
-                    friend3X = friend3X - runnerSpeed;
+                    friend3X = friend3X - friend2runnerSpeed;
                 }
                 else
                 {
-                    friend3X = friend3X + runnerSpeed;
+                    friend3X = friend3X + friend2runnerSpeed;
                 }
 
                 if (friend3Y < friend1Y)
                 {
-                    friend3Y = friend3Y - runnerSpeed;
+                    friend3Y = friend3Y - friend2runnerSpeed;
                 }
                 else
                 {
-                    friend3Y = friend3Y + runnerSpeed;
+                    friend3Y = friend3Y + friend2runnerSpeed;
                 }
             }
         }
@@ -733,62 +754,62 @@ namespace Basic_Game_Template
             {
                 if (playX < friend1X)
                 {
-                    friend1X = friend1X + runnerSpeed + 2;
+                    friend1X = friend1X + chaserSpeed + 2;
                 }
                 else
                 {
-                    friend1X = friend1X - runnerSpeed - 2;
+                    friend1X = friend1X - chaserSpeed - 2;
                 }
 
                 if (playY < friend1Y)
                 {
-                    friend1Y = friend1Y + runnerSpeed + 2;
+                    friend1Y = friend1Y + chaserSpeed + 2;
                 }
                 else
                 {
-                    friend1Y = friend1Y - runnerSpeed - 2;
+                    friend1Y = friend1Y - chaserSpeed - 2;
                 }
             }
             else if ((friend2X > playX && friend2X > friend3X) && (friend2Y > playY && friend2Y > friend3Y))
             {
                 if (friend2X < friend1X)
                 {
-                    friend1X = friend1X + runnerSpeed + 2;
+                    friend1X = friend1X + chaserSpeed + 2;
                 }
                 else
                 {
-                    friend1X = friend1X - runnerSpeed - 2;
+                    friend1X = friend1X - chaserSpeed - 2;
                 }
 
                 if (friend2Y < friend1Y)
                 {
-                    friend1Y = friend1Y + runnerSpeed + 2;
+                    friend1Y = friend1Y + chaserSpeed + 2;
                 }
                 else
                 {
-                    friend1Y = friend1Y - runnerSpeed - 2;
+                    friend1Y = friend1Y - chaserSpeed - 2;
                 }
             }
             else if ((friend3X > playX && friend3X > friend2X) && (friend3Y > playY && friend3Y > friend2Y))
             {
                 if (friend3X < friend1X)
                 {
-                    friend1X = friend1X + runnerSpeed + 2;
+                    friend1X = friend1X + chaserSpeed + 2;
                 }
                 else
                 {
-                    friend1X = friend1X - runnerSpeed - 2;
+                    friend1X = friend1X - chaserSpeed - 2;
                 }
 
                 if (friend3Y < friend1Y)
                 {
-                    friend1Y = friend1Y + runnerSpeed + 2;
+                    friend1Y = friend1Y + chaserSpeed + 2;
                 }
                 else
                 {
-                    friend1Y = friend1Y - runnerSpeed - 2;
+                    friend1Y = friend1Y - chaserSpeed - 2;
                 }
-            } 
+            }
         }
 
         public void friend2chaserMethod()
@@ -805,60 +826,60 @@ namespace Basic_Game_Template
             {
                 if (friend2X < friend1X)
                 {
-                    friend1X = friend1X + runnerSpeed + 2;
+                    friend1X = friend1X + chaserSpeed + 2;
                 }
                 else
                 {
-                    friend1X = friend1X - runnerSpeed - 2;
+                    friend1X = friend1X - chaserSpeed - 2;
                 }
 
                 if (friend2Y < friend1Y)
                 {
-                    friend1Y = friend1Y + runnerSpeed + 2;
+                    friend1Y = friend1Y + chaserSpeed + 2;
                 }
                 else
                 {
-                    friend1Y = friend1Y - runnerSpeed - 2;
+                    friend1Y = friend1Y - chaserSpeed - 2;
                 }
             }
             else if (heroVar1 < mon2Var1)
             {
                 if (friend2X < playX)
                 {
-                    friend1X = friend1X + runnerSpeed + 2;
+                    friend1X = friend1X + chaserSpeed + 2;
                 }
                 else
                 {
-                    friend1X = friend1X - runnerSpeed - 2;
+                    friend1X = friend1X - chaserSpeed - 2;
                 }
 
                 if (friend2Y < playY)
                 {
-                    friend1Y = friend1Y + runnerSpeed + 2;
+                    friend1Y = friend1Y + chaserSpeed + 2;
                 }
                 else
                 {
-                    friend1Y = friend1Y - runnerSpeed - 2;
+                    friend1Y = friend1Y - chaserSpeed - 2;
                 }
             }
             else
             {
                 if (friend2X < playX)
                 {
-                    friend1X = friend1X + runnerSpeed + 2;
+                    friend1X = friend1X + chaserSpeed + 2;
                 }
                 else
                 {
-                    friend1X = friend1X - runnerSpeed - 2;
+                    friend1X = friend1X - chaserSpeed - 2;
                 }
 
                 if (friend2Y < playY)
                 {
-                    friend1Y = friend1Y + runnerSpeed + 2;
+                    friend1Y = friend1Y + chaserSpeed + 2;
                 }
                 else
                 {
-                    friend1Y = friend1Y - runnerSpeed - 2;
+                    friend1Y = friend1Y - chaserSpeed - 2;
                 }
             }
         }
@@ -877,60 +898,60 @@ namespace Basic_Game_Template
             {
                 if (friend2X < friend1X)
                 {
-                    friend1X = friend1X + runnerSpeed + 2;
+                    friend1X = friend1X + chaserSpeed + 2;
                 }
                 else
                 {
-                    friend1X = friend1X - runnerSpeed - 2;
+                    friend1X = friend1X - chaserSpeed - 2;
                 }
 
                 if (friend2Y < friend1Y)
                 {
-                    friend1Y = friend1Y + runnerSpeed + 2;
+                    friend1Y = friend1Y + chaserSpeed + 2;
                 }
                 else
                 {
-                    friend1Y = friend1Y - runnerSpeed - 2;
+                    friend1Y = friend1Y - chaserSpeed - 2;
                 }
             }
             else if (heroVar1 < mon2Var1)
             {
                 if (friend2X < playX)
                 {
-                    friend1X = friend1X + runnerSpeed + 2;
+                    friend1X = friend1X + chaserSpeed + 2;
                 }
                 else
                 {
-                    friend1X = friend1X - runnerSpeed - 2;
+                    friend1X = friend1X - chaserSpeed - 2;
                 }
 
                 if (friend2Y < playY)
                 {
-                    friend1Y = friend1Y + runnerSpeed + 2;
+                    friend1Y = friend1Y + chaserSpeed + 2;
                 }
                 else
                 {
-                    friend1Y = friend1Y - runnerSpeed - 2;
+                    friend1Y = friend1Y - chaserSpeed - 2;
                 }
             }
             else
             {
                 if (friend2X < playX)
                 {
-                    friend1X = friend1X + runnerSpeed + 2;
+                    friend1X = friend1X + chaserSpeed + 2;
                 }
                 else
                 {
-                    friend1X = friend1X - runnerSpeed - 2;
+                    friend1X = friend1X - chaserSpeed - 2;
                 }
 
                 if (friend2Y < playY)
                 {
-                    friend1Y = friend1Y + runnerSpeed + 2;
+                    friend1Y = friend1Y + chaserSpeed + 2;
                 }
                 else
                 {
-                    friend1Y = friend1Y - runnerSpeed - 2;
+                    friend1Y = friend1Y - chaserSpeed - 2;
                 }
             }
         }
