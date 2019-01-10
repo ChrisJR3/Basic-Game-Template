@@ -729,15 +729,27 @@ namespace Basic_Game_Template
 
         public void friend1chaserMethod()
         {
-            //Variables
-            int heroLoc = playX + playY;
-            int mon2Loc = friend1X + friend1Y;
+            if ((playX > friend2X && playX > friend3X) && (playY > friend2Y && playY > friend3Y))
+            {
+                if (playX < friend1X)
+                {
+                    friend1X = friend1X + runnerSpeed + 2;
+                }
+                else
+                {
+                    friend1X = friend1X - runnerSpeed - 2;
+                }
 
-            //Moving
-            int heroVar1 = heroLoc - mon2Loc;
-            int mon2Var1 = mon2Loc - heroLoc;
-
-            if (heroVar1 > mon2Var1)
+                if (playY < friend1Y)
+                {
+                    friend1Y = friend1Y + runnerSpeed + 2;
+                }
+                else
+                {
+                    friend1Y = friend1Y - runnerSpeed - 2;
+                }
+            }
+            else if ((friend2X > playX && friend2X > friend3X) && (friend2Y > playY && friend2Y > friend3Y))
             {
                 if (friend2X < friend1X)
                 {
@@ -757,9 +769,9 @@ namespace Basic_Game_Template
                     friend1Y = friend1Y - runnerSpeed - 2;
                 }
             }
-            else if (heroVar1 < mon2Var1)
+            else if ((friend3X > playX && friend3X > friend2X) && (friend3Y > playY && friend3Y > friend2Y))
             {
-                if (friend2X < playX)
+                if (friend3X < friend1X)
                 {
                     friend1X = friend1X + runnerSpeed + 2;
                 }
@@ -768,7 +780,7 @@ namespace Basic_Game_Template
                     friend1X = friend1X - runnerSpeed - 2;
                 }
 
-                if (friend2Y < playY)
+                if (friend3Y < friend1Y)
                 {
                     friend1Y = friend1Y + runnerSpeed + 2;
                 }
@@ -776,27 +788,7 @@ namespace Basic_Game_Template
                 {
                     friend1Y = friend1Y - runnerSpeed - 2;
                 }
-            }
-            else
-            {
-                if (friend2X < playX)
-                {
-                    friend1X = friend1X + runnerSpeed + 2;
-                }
-                else
-                {
-                    friend1X = friend1X - runnerSpeed - 2;
-                }
-
-                if (friend2Y < playY)
-                {
-                    friend1Y = friend1Y + runnerSpeed + 2;
-                }
-                else
-                {
-                    friend1Y = friend1Y - runnerSpeed - 2;
-                }
-            }
+            } 
         }
 
         public void friend2chaserMethod()
