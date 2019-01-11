@@ -178,7 +178,7 @@ namespace Basic_Game_Template
             {
                 if (playChaser == true)
                 {
-                    if (friend1X > playX + 100 || friend1X < playX + 100)
+                    if (friend1X > playX + 50 || friend1X < playX + 50)
                     {
                         if (friend1X < playX)
                         {
@@ -189,7 +189,7 @@ namespace Basic_Game_Template
                             friend1X = friend1X + friend1runnerSpeed;
                         }
                     }
-                    else if (friend1Y > playY + 100 || friend1Y < playY + 100)
+                    else if (friend1Y > playY + 50 || friend1Y < playY + 50)
                     {
                         if (friend1Y < playY)
                         {
@@ -205,7 +205,7 @@ namespace Basic_Game_Template
                 }
                 else if (friend2Chaser == true)
                 {
-                    if (friend1X > friend2X + 100 || friend1X < friend2X + 100)
+                    if (friend1X > friend2X + 50 || friend1X < friend2X + 50)
                     {
                         if (friend1X < friend2X)
                         {
@@ -216,7 +216,7 @@ namespace Basic_Game_Template
                             friend1X = friend1X + friend1runnerSpeed;
                         }
                     }
-                    else if (friend2Y > friend2Y + 100 || friend2Y < friend2Y + 100)
+                    else if (friend2Y > friend2Y + 50 || friend2Y < friend2Y + 50)
                     {
                         if (friend1Y < friend2Y)
                         {
@@ -231,6 +231,38 @@ namespace Basic_Game_Template
                 }
                 else if (friend3Chaser == true)
                 {
+                    if (friend1X > friend3X + 50 || friend1X < friend3X + 50)
+                    {
+                        if (friend1X < friend3X)
+                        {
+                            friend1X = friend1X - friend1runnerSpeed;
+                        }
+                        else
+                        {
+                            friend1X = friend1X + friend1runnerSpeed;
+                        }
+                    }
+                    else if (friend2Y > friend3Y + 50 || friend2Y < friend3Y + 50)
+                    {
+                        if (friend1Y < friend3Y)
+                        {
+                            friend1Y = friend1Y - friend1runnerSpeed;
+                        }
+                        else
+                        {
+                            friend1Y = friend1Y + friend1runnerSpeed;
+                        }
+                    }
+                    else { }
+                }
+                else { }
+            }
+
+            if (friend2Chaser == true) { friend2chaserMethod(); }
+            else
+            {
+                if (playChaser == true)
+                {
                     if (friend1X < friend3X)
                     {
                         friend1X = friend1X - friend1runnerSpeed;
@@ -240,7 +272,7 @@ namespace Basic_Game_Template
                         friend1X = friend1X + friend1runnerSpeed;
                     }
                 }
-                else if (friend1Y > friend3Y + 100 || friend1Y < friend3Y + 100)
+                else if (friend2Y > friend3Y + 50 || friend2Y < friend3Y + 50)
                 {
                     if (friend1Y < friend3Y)
                     {
@@ -252,31 +284,8 @@ namespace Basic_Game_Template
                     }
                 }
                 else { }
-            }
-
-            if (friend2Chaser == true) { friend2chaserMethod(); }
-            else
-            {
-                if (playChaser == true)
-                {
-                    if (friend2X < playX)
-                    {
-                        friend2X = friend2X - friend2runnerSpeed;
-                    }
-                    else
-                    {
-                        friend2X = friend2X + friend2runnerSpeed;
-                    }
-
-                    if (friend2Y < playY)
-                    {
-                        friend2Y = friend2Y - friend2runnerSpeed;
-                    }
-                    else
-                    {
-                        friend2Y = friend2Y + friend2runnerSpeed;
-                    }
-                }
+            
+            
                 else if (friend2Chaser == true)
                 {
                     if (friend2X < friend1X)
@@ -299,7 +308,7 @@ namespace Basic_Game_Template
                 }
                 else if (friend3Chaser == true)
                 {
-                    if (friend2X < friend3X)
+                    if (friend1X < friend3X)
                     {
                         friend2X = friend2X - friend2runnerSpeed;
                     }
@@ -750,6 +759,9 @@ namespace Basic_Game_Template
 
         public void friend1chaserMethod()
         {
+
+            //if ()
+
             if ((playX > friend2X && playX > friend3X) && (playY > friend2Y && playY > friend3Y))
             {
                 if (playX < friend1X)
