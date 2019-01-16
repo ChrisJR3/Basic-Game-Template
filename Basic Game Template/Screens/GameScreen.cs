@@ -434,7 +434,7 @@ namespace Basic_Game_Template
                     }
                 }
             }
-            
+
             // Friend 2:
             if (friend2Chaser == true)
             {
@@ -1002,17 +1002,17 @@ namespace Basic_Game_Template
 
             // Friend3 graphics
             if (friend3Chaser == true) { e.Graphics.FillRectangle(chaserBrush, friend3X, friend3Y, 12, 12); }
-            else { e.Graphics.FillRectangle(runnerBrush, friend3X, friend3Y, 12, 12); }  
+            else { e.Graphics.FillRectangle(runnerBrush, friend3X, friend3Y, 12, 12); }
         }
 
         public void friend1chaserMethod()
         {
-            
+
         }
- 
+
         public void friend2chaserMethod()
         {
-            
+
         }
 
         public void friend3chaserMethod()
