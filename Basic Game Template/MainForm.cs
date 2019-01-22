@@ -70,6 +70,12 @@ namespace Basic_Game_Template
                 case "ScoreScreen":
                     ns = new ScoreScreen();
                     break;
+                case "EndGameScreen":
+                    ns = new EndGameScreen();
+                    break;
+                case "WinGameScreen":
+                    ns = new WinGameScreen();
+                    break;
             }
 
             //centres the control on the screen

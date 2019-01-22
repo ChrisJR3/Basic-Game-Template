@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EndGameScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EndGameScreen.Designer.cs">
+      <DependentUpon>EndGameScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Screens\PauseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +90,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WinGameScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinGameScreen.Designer.cs">
+      <DependentUpon>WinGameScreen.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="EndGameScreen.resx">
+      <DependentUpon>EndGameScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -108,6 +123,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Screens\ScoreScreen.resx">
       <DependentUpon>ScoreScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinGameScreen.resx">
+      <DependentUpon>WinGameScreen.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">

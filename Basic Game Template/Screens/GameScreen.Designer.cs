@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.gameTimer = new System.Windows.Forms.Timer(this.components);
+            this.invisLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // gameTimer
@@ -38,11 +39,23 @@
             this.gameTimer.Interval = 20;
             this.gameTimer.Tick += new System.EventHandler(this.gameTimer_Tick);
             // 
+            // invisLabel
+            // 
+            this.invisLabel.BackColor = System.Drawing.Color.Transparent;
+            this.invisLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.invisLabel.ForeColor = System.Drawing.Color.White;
+            this.invisLabel.Location = new System.Drawing.Point(29, 66);
+            this.invisLabel.Name = "invisLabel";
+            this.invisLabel.Size = new System.Drawing.Size(266, 182);
+            this.invisLabel.TabIndex = 0;
+            this.invisLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // GameScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Lime;
+            this.BackColor = System.Drawing.Color.Green;
+            this.Controls.Add(this.invisLabel);
             this.DoubleBuffered = true;
             this.Name = "GameScreen";
             this.Size = new System.Drawing.Size(327, 305);
@@ -56,5 +69,6 @@
         #endregion
 
         private System.Windows.Forms.Timer gameTimer;
+        private System.Windows.Forms.Label invisLabel;
     }
 }
