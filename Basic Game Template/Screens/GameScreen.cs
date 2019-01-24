@@ -39,7 +39,6 @@ namespace Basic_Game_Template
 
         int collisionWait = 0;
 
-        Font drawFont = new Font("Arial", 16, FontStyle.Bold);
         SolidBrush drawBrush = new SolidBrush(Color.Black);
         SolidBrush winBrush = new SolidBrush(Color.White);
 
@@ -73,10 +72,12 @@ namespace Basic_Game_Template
         SolidBrush numBrush = new SolidBrush(Color.White);
         SolidBrush blackBrush = new SolidBrush(Color.Black);
 
+        Font drawFont = new Font("Arial", 16, FontStyle.Bold);
         Font playFont = new Font("AriaL", 6);
         Font friend1Font = new Font("AriaL", 5);
         Font friend2Font = new Font("AriaL", 6);
         Font friend3Font = new Font("AriaL", 8);
+        Font nameFont = new Font("Arial", 10);
 
         public GameScreen()
         {
@@ -107,7 +108,7 @@ namespace Basic_Game_Template
         {
             // opens a pause screen is escape is pressed. Depending on what is pressed
             // on pause screen the program will either continue or exit to main menu
-            if (e.KeyCode == Keys.Escape && gameTimer.Enabled)
+            if (e.KeyCode == Keys.Escape && gameTimer.Enabled = true)
             {
                 gameTimer.Enabled = false;
                 rightArrowDown = leftArrowDown = upArrowDown = downArrowDown = false;
@@ -177,6 +178,18 @@ namespace Basic_Game_Template
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
+            friend1playchaserdis = (playX - friend1X) ^ 2 + (playY - friend1Y) ^ 2;
+            friend1friend2chaserdis = (friend2X - friend1X) ^ 2 + (friend2Y - friend1Y) ^ 2;
+            friend1friend3chaserdis = (friend3X - friend1X) ^ 2 + (friend3Y - friend1Y) ^ 2;
+
+            friend2playchaserdis = (playX - friend2X) ^ 2 + (playY - friend2Y) ^ 2;
+            friend2friend1chaserdis = (friend1X - friend2X) ^ 2 + (friend1Y - friend2Y) ^ 2;
+            friend2friend3chaserdis = (friend3X - friend2X) ^ 2 + (friend3Y - friend2Y) ^ 2;
+
+            friend3playchaserdis = (playX - friend3X) ^ 2 + (playY - friend3Y) ^ 2;
+            friend3friend2chaserdis = (friend2X - friend3X) ^ 2 + (friend2Y - friend3Y) ^ 2;
+            friend3friend1chaserdis = (friend1X - friend3X) ^ 2 + (friend1Y - friend3Y) ^ 2;
+
             timer1 = counter / 35;
 
             while (counter3 < 1000)
@@ -251,108 +264,7 @@ namespace Basic_Game_Template
                     friend1Friend2Close = false;
                     friend1PlayerClose = false;
                 }
-
-                //if ((friend1X > 150) && (friend1Y > 150))
-                //{
-                //    // if the player is closest:
-                //    if ((playX > friend2X && playX > friend3X) && (playY > friend2Y && playY > friend3Y))
-                //    {
-                //        friend1PlayerClose = true;
-                //        friend1Friend2Close = false;
-                //        friend1Friend3Close = false;
-                //    }
-                //    // if friend2 is closest:
-                //    else if ((friend2X > playX && friend2X > friend3X) && (friend2Y > playY && friend1Y > friend3Y))
-                //    {
-                //        friend1Friend2Close = true;
-                //        friend1PlayerClose = false;
-                //        friend1Friend3Close = false;
-                //    }
-                //    //if friend3 is closest:
-                //    else if ((friend3X > playX && friend3X > friend2X) && (friend3Y > playY && friend3Y > friend2Y))
-                //    {
-                //        friend1Friend3Close = true;
-                //        friend1Friend2Close = false;
-                //        friend1PlayerClose = false;
-
-                //    }
-                //}
-
-                //else if ((friend1X > 150) && (friend1Y < 150))
-                //{
-                //    // if the player is closest:
-                //    if ((playX > friend2X && playX > friend3X) && (playY < friend2Y && playY < friend3Y))
-                //    {
-                //        friend1PlayerClose = true;
-                //        friend1Friend2Close = false;
-                //        friend1Friend3Close = false;
-                //    }
-                //    // if friend2 is closest:
-                //    else if ((friend2X > playX && friend2X > friend3X) && (friend2Y < playY && friend2Y < friend3Y))
-                //    {
-                //        friend1Friend2Close = true;
-                //        friend1PlayerClose = false;
-                //        friend1Friend3Close = false;
-                //    }
-                //    //if friend3 is closest:
-                //    else if ((friend3X > playX && friend3X > friend2X) && (friend3Y < playY && friend3Y < friend2Y))
-                //    {
-                //        friend1Friend3Close = true;
-                //        friend1Friend2Close = false;
-                //        friend1PlayerClose = false;
-                //    }
-                //}
-
-                //else if ((friend1X <= 150) && (friend1Y <= 150))
-                //{
-                //    // if the player is closest:
-                //    if ((playX <= friend2X && playX <= friend3X) && (playY <= friend2Y && playY <= friend3Y))
-                //    {
-                //        friend1PlayerClose = true;
-                //        friend1Friend2Close = false;
-                //        friend1Friend3Close = false;
-                //    }
-                //    // if friend2 is closest:
-                //    else if ((friend2X <= playX && friend2X <= friend3X) && (friend2Y <= playY && friend2Y <= friend3Y))
-                //    {
-                //        friend1Friend2Close = true;
-                //        friend1PlayerClose = false;
-                //        friend1Friend3Close = false;
-                //    }
-                //    //if friend3 is closest:
-                //    else if ((friend3X <= playX && friend3X <= friend2X) && (friend3Y <= playY && friend3Y <= friend2Y))
-                //    {
-                //        friend1Friend3Close = true;
-                //        friend1Friend2Close = false;
-                //        friend1PlayerClose = false;
-                //    }
-                //}
-
-                //else if ((friend1X <= 150) && (friend1Y >= 150))
-                //{
-                //    // if the player is closest:
-                //    if ((playX <= friend2X && playX <= friend3X) && (playY >= friend2Y && playY >= friend3Y))
-                //    {
-                //        friend1PlayerClose = true;
-                //        friend1Friend2Close = false;
-                //        friend1Friend3Close = false;
-                //    }
-                //    // if friend2 is closest:
-                //    else if ((friend2X <= playX && friend2X <= friend3X) && (friend2Y >= playY && friend2Y >= friend3Y))
-                //    {
-                //        friend1Friend2Close = true;
-                //        friend1PlayerClose = false;
-                //        friend1Friend3Close = false;
-                //    }
-                //    //if friend3 is closest:
-                //    else if ((friend3X <= playX && friend3X <= friend2X) && (friend3Y >= playY && friend3Y >= friend2Y))
-                //    {
-                //        friend1Friend3Close = true;
-                //        friend1Friend2Close = false;
-                //        friend1PlayerClose = false;
-                //    }
-                //}
-
+                
                 // If player is closest
                 if (friend1PlayerClose == true)
                 {
@@ -419,7 +331,7 @@ namespace Basic_Game_Template
             {
                 // If the player is it
 
-                if (playChaser == true)
+                if (friend1playchaserdis < 50)
                 {
                     if (friend1X > (playX + 50) || friend1X < (playX + 50))
                     {
@@ -448,7 +360,7 @@ namespace Basic_Game_Template
 
                 // If friend2 is it
 
-                if (friend2Chaser == true)
+                if (friend1friend2chaserdis < 50)
                 {
                     if (friend1X > (friend2X + 50) || friend1X < (friend2X + 50))
                     {
@@ -476,7 +388,7 @@ namespace Basic_Game_Template
 
                 // If friend3 is it
 
-                if (friend3Chaser == true)
+                if (friend1friend2chaserdis < 50)
                 {
                     if (friend1X > (friend3X + 50) || friend1X < (friend3X + 50))
                     {
@@ -543,107 +455,6 @@ namespace Basic_Game_Template
                     friend2PlayerClose = false;
                 }
 
-                //    if ((friend2X > 150) && (friend2Y > 150))
-                //    {
-                //        // if the player is closest:
-                //        if ((playX > friend1X && playX > friend3X) && (playY > friend1Y && playY > friend3Y))
-                //        {
-                //            friend2PlayerClose = true;
-                //            friend2Friend1Close = false;
-                //            friend2Friend3Close = false;
-                //        }
-                //        // if friend1 is closest:
-                //        else if ((friend1X > playX && friend1X > friend3X) && (friend1Y > playY && friend1Y > friend3Y))
-                //        {
-                //            friend2Friend1Close = true;
-                //            friend2PlayerClose = false;
-                //            friend2Friend3Close = false;
-                //        }
-                //        //if friend3 is closest:
-                //        else if ((friend3X > playX && friend3X > friend2X) && (friend3Y > playY && friend3Y > friend2Y))
-                //        {
-                //            friend2Friend3Close = true;
-                //            friend2Friend1Close = false;
-                //            friend2PlayerClose = false;
-
-                //        }
-                //    }
-
-                //    else if ((friend2X > 150) && (friend2Y < 150))
-                //    {
-                //        // if the player is closest:
-                //        if ((playX > friend1X && playX > friend3X) && (playY < friend1Y && playY < friend3Y))
-                //        {
-                //            friend2PlayerClose = true;
-                //            friend2Friend1Close = false;
-                //            friend2Friend3Close = false;
-                //        }
-                //        // if friend1 is closest:
-                //        else if ((friend1X > playX && friend1X > friend3X) && (friend1Y < playY && friend1Y < friend3Y))
-                //        {
-                //            friend2Friend1Close = true;
-                //            friend2PlayerClose = false;
-                //            friend2Friend3Close = false;
-                //        }
-                //        //if friend3 is closest:
-                //        else if ((friend3X > playX && friend3X > friend1X) && (friend3Y < playY && friend3Y < friend1Y))
-                //        {
-                //            friend2Friend3Close = true;
-                //            friend2Friend1Close = false;
-                //            friend2PlayerClose = false;
-                //        }
-                //    }
-
-                //    else if ((friend2X <= 150) && (friend2Y <= 150))
-                //    {
-                //        // if the player is closest:
-                //        if ((playX <= friend1X && playX <= friend3X) && (playY <= friend1Y && playY <= friend3Y))
-                //        {
-                //            friend2PlayerClose = true;
-                //            friend2Friend1Close = false;
-                //            friend2Friend3Close = false;
-                //        }
-                //        // if friend1 is closest:
-                //        else if ((friend1X <= playX && friend1X <= friend3X) && (friend1Y <= playY && friend1Y <= friend3Y))
-                //        {
-                //            friend2Friend1Close = true;
-                //            friend2PlayerClose = false;
-                //            friend2Friend3Close = false;
-                //        }
-                //        //if friend3 is closest:
-                //        else if ((friend3X <= playX && friend3X <= friend1X) && (friend3Y <= playY && friend3Y <= friend1Y))
-                //        {
-                //            friend2Friend3Close = true;
-                //            friend2Friend1Close = false;
-                //            friend2PlayerClose = false;
-                //        }
-                //    }
-
-                //    else if ((friend2X <= 150) && (friend2Y >= 150))
-                //    {
-                //        // if the player is closest:
-                //        if ((playX <= friend1X && playX <= friend3X) && (playY >= friend1Y && playY >= friend3Y))
-                //        {
-                //            friend2PlayerClose = true;
-                //            friend2Friend1Close = false;
-                //            friend2Friend3Close = false;
-                //        }
-                //        // if friend1 is closest:
-                //        else if ((friend1X <= playX && friend1X <= friend3X) && (friend1Y >= playY && friend1Y >= friend3Y))
-                //        {
-                //            friend2Friend1Close = true;
-                //            friend2PlayerClose = false;
-                //            friend2Friend3Close = false;
-                //        }
-                //        //if friend3 is closest:
-                //        else if ((friend3X <= playX && friend3X <= friend1X) && (friend3Y >= playY && friend3Y >= friend1Y))
-                //        {
-                //            friend2Friend3Close = true;
-                //            friend2Friend1Close = false;
-                //            friend2PlayerClose = false;
-                //        }
-                //    }
-
                 // If player is closest
                 if (friend2PlayerClose == true)
                 {
@@ -709,7 +520,7 @@ namespace Basic_Game_Template
             {
                 // If the player is it
 
-                if (playChaser == true)
+                if (friend2playchaserdis > 50)
                 {
                     if (friend2X > (playX + 50) || friend2X < (playX + 50))
                     {
@@ -737,7 +548,7 @@ namespace Basic_Game_Template
 
                 // If friend1 is it
 
-                if (friend1Chaser == true)
+                if (friend2friend1chaserdis > 50)
                 {
                     if (friend2X > (friend1X + 50) || friend2X < (friend1X + 50))
                     {
@@ -765,7 +576,7 @@ namespace Basic_Game_Template
 
                 // If friend3 is it
 
-                if (friend3Chaser == true)
+                if (friend2friend3chaserdis > 50)
                 {
                     if (friend2X > (friend3X + 50) || friend2X < (friend3X + 50))
                     {
@@ -831,107 +642,6 @@ namespace Basic_Game_Template
                     friend3PlayerClose = false;
                 }
 
-                //if ((friend3X > 150) && (friend3Y > 150))
-                //{
-                //    // if the player is closest:
-                //    if ((playX > friend2X && playX > friend1X) && (playY > friend2Y && playY > friend1Y))
-                //    {
-                //        friend3PlayerClose = true;
-                //        friend3Friend2Close = false;
-                //        friend3Friend1Close = false;
-                //    }
-                //    // if friend2 is closest:
-                //    else if ((friend2X > playX && friend2X > friend3X) && (friend2Y > playY && friend2Y > friend3Y))
-                //    {
-                //        friend3Friend2Close = true;
-                //        friend3PlayerClose = false;
-                //        friend3Friend1Close = false;
-                //    }
-                //    //if friend1 is closest:
-                //    else if ((friend1X > playX && friend1X > friend2X) && (friend1Y > playY && friend1Y > friend2Y))
-                //    {
-                //        friend3Friend1Close = true;
-                //        friend3Friend2Close = false;
-                //        friend3PlayerClose = false;
-
-                //    }
-                //}
-
-                //else if ((friend3X > 150) && (friend3Y < 150))
-                //{
-                //    // if the player is closest:
-                //    if ((playX > friend2X && playX > friend1X) && (playY < friend2Y && playY < friend1Y))
-                //    {
-                //        friend3PlayerClose = true;
-                //        friend3Friend2Close = false;
-                //        friend3Friend1Close = false;
-                //    }
-                //    // if friend2 is closest:
-                //    else if ((friend2X > playX && friend2X > friend1X) && (friend2Y < playY && friend2Y < friend1Y))
-                //    {
-                //        friend3Friend2Close = true;
-                //        friend3PlayerClose = false;
-                //        friend3Friend1Close = false;
-                //    }
-                //    //if friend1 is closest:
-                //    else if ((friend1X > playX && friend1X > friend2X) && (friend1Y < playY && friend1Y < friend2Y))
-                //    {
-                //        friend3Friend1Close = true;
-                //        friend3Friend2Close = false;
-                //        friend3PlayerClose = false;
-                //    }
-                //}
-
-                //else if ((friend3X <= 150) && (friend3Y <= 150))
-                //{
-                //    // if the player is closest:
-                //    if ((playX <= friend2X && playX <= friend1X) && (playY <= friend2Y && playY <= friend1Y))
-                //    {
-                //        friend3PlayerClose = true;
-                //        friend3Friend2Close = false;
-                //        friend3Friend1Close = false;
-                //    }
-                //    // if friend2 is closest:
-                //    else if ((friend2X <= playX && friend2X <= friend1X) && (friend2Y <= playY && friend2Y <= friend1Y))
-                //    {
-                //        friend3Friend2Close = true;
-                //        friend3PlayerClose = false;
-                //        friend3Friend1Close = false;
-                //    }
-                //    //if friend1 is closest:
-                //    else if ((friend1X <= playX && friend1X <= friend2X) && (friend1Y <= playY && friend1Y <= friend2Y))
-                //    {
-                //        friend3Friend1Close = true;
-                //        friend3Friend2Close = false;
-                //        friend3PlayerClose = false;
-                //    }
-                //}
-
-                //else if ((friend3X <= 150) && (friend3Y >= 150))
-                //{
-                //    // if the player is closest:
-                //    if ((playX <= friend2X && playX <= friend1X) && (playY >= friend2Y && playY >= friend1Y))
-                //    {
-                //        friend3PlayerClose = true;
-                //        friend3Friend2Close = false;
-                //        friend3Friend1Close = false;
-                //    }
-                //    // if friend2 is closest:
-                //    else if ((friend2X <= playX && friend2X <= friend1X) && (friend2Y >= playY && friend2Y >= friend1Y))
-                //    {
-                //        friend3Friend2Close = true;
-                //        friend3PlayerClose = false;
-                //        friend3Friend1Close = false;
-                //    }
-                //    //if friend1 is closest:
-                //    else if ((friend1X <= playX && friend1X <= friend2X) && (friend1Y >= playY && friend1Y >= friend2Y))
-                //    {
-                //        friend3Friend1Close = true;
-                //        friend3Friend2Close = false;
-                //        friend3PlayerClose = false;
-                //    }
-                //}
-
                 // If player is closest
                 if (friend3PlayerClose == true)
                 {
@@ -943,7 +653,7 @@ namespace Basic_Game_Template
                     {
                         friend3X = friend3X + chaserSpeed;
                     }
-                    else if (friend3Y > playY)
+                    if (friend3Y > playY)
                     {
                         friend3Y = friend3Y - chaserSpeed;
                     }
@@ -963,7 +673,7 @@ namespace Basic_Game_Template
                     {
                         friend3X = friend3X + chaserSpeed;
                     }
-                     if (friend3Y > friend2Y)
+                    if (friend3Y > friend2Y)
                     {
                         friend3Y = friend3Y - chaserSpeed;
                     }
@@ -983,7 +693,7 @@ namespace Basic_Game_Template
                     {
                         friend3X = friend3X + chaserSpeed;
                     }
-                     if (friend3Y > friend1Y)
+                    if (friend3Y > friend1Y)
                     {
                         friend3Y = friend3Y - chaserSpeed;
                     }
@@ -998,7 +708,7 @@ namespace Basic_Game_Template
             {
                 // If the player is the tagger 
 
-                if (playChaser == true)
+                if (friend3playchaserdis > 50)
                 {
                     if (friend3X > (playX + 50) || friend3X < (playX + 50))
                     {
@@ -1026,7 +736,7 @@ namespace Basic_Game_Template
 
                 // If friend1 is the tagger
 
-                if (friend1Chaser == true)
+                if (friend3friend1chaserdis > 50)
                 {
                     if (friend3X > (friend1X + 50) || friend3X < (friend1X + 50))
                     {
@@ -1054,7 +764,7 @@ namespace Basic_Game_Template
 
                 // If friend2 is the tagger
 
-                if (friend2Chaser == true)
+                if (friend3friend2chaserdis > 50)
                 {
                     if (friend3X > (friend2X + 50) || friend3X < (friend2X + 50))
                     {
@@ -1305,6 +1015,13 @@ namespace Basic_Game_Template
 
             //timer
             e.Graphics.DrawString("Time Remaining: " + (300 - counter/35), playFont, blackBrush, 100, 20);
+
+            //Credits to the makers
+            e.Graphics.DrawString("By: Charlie Kevill and Chris Rouse", playFont, numBrush, (this.Width - 30), (this.Height - 10));
+
+            //Name of the Game
+            e.Graphics.DrawString("RUN", playFont, numBrush, 0, 0);
+
         }
         public int restrictionMethodX(int chX)
         {
