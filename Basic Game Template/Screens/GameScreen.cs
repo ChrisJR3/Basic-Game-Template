@@ -49,23 +49,23 @@ namespace Basic_Game_Template
         int randomValue;
 
         //TODO create your global game variables here
-        int playrunnerSpeed = 4;
+        int playrunnerSpeed = 5;
         int friend1runnerSpeed = 3;
         int friend2runnerSpeed = 2;
         int friend3runnerSpeed = 1;
         int chaserSpeed = 4;
         int playX, playY, friend1X, friend1Y, friend2X, friend2Y, friend3X, friend3Y;
         int counter;
-        int counter3;
+        int counter3 = 0;
         int timer1 = 0;
 
         int friend1playsubs, friend1friend2subs, friend1friend3subs;
         int friend2playsubs, friend2friend1subs, friend2friend3subs;
         int friend3playsubs, friend3friend1subs, friend3friend2subs;
 
-        int friend1playchaserdis, friend1friend2chaserdis, friend1friend3chaserdis;
-        int friend2playchaserdis, friend2friend1chaserdis, friend2friend3chaserdis;
-        int friend3playchaserdis, friend3friend1chaserdis, friend3friend2chaserdis;
+        double friend1playchaserdis, friend1friend2chaserdis, friend1friend3chaserdis;
+        double friend2playchaserdis, friend2friend1chaserdis, friend2friend3chaserdis;
+        double friend3playchaserdis, friend3friend1chaserdis, friend3friend2chaserdis;
 
         SolidBrush chaserBrush = new SolidBrush(Color.Red);
         SolidBrush runnerBrush = new SolidBrush(Color.Blue);
@@ -108,7 +108,7 @@ namespace Basic_Game_Template
         {
             // opens a pause screen is escape is pressed. Depending on what is pressed
             // on pause screen the program will either continue or exit to main menu
-            if (e.KeyCode == Keys.Escape && gameTimer.Enabled = true)
+            if (e.KeyCode == Keys.Escape && gameTimer.Enabled)
             {
                 gameTimer.Enabled = false;
                 rightArrowDown = leftArrowDown = upArrowDown = downArrowDown = false;
@@ -178,31 +178,33 @@ namespace Basic_Game_Template
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
-            friend1playchaserdis = (playX - friend1X) ^ 2 + (playY - friend1Y) ^ 2;
-            friend1friend2chaserdis = (friend2X - friend1X) ^ 2 + (friend2Y - friend1Y) ^ 2;
-            friend1friend3chaserdis = (friend3X - friend1X) ^ 2 + (friend3Y - friend1Y) ^ 2;
+            friend1playchaserdis = Math.Sqrt((playX - friend1X) * (playX - friend1X) + (playY - friend1Y) * (playY - friend1Y));
+            friend1friend2chaserdis = Math.Sqrt((friend2X - friend1X) * (friend2X - friend1X) + (friend2Y - friend1Y) * (friend2Y - friend1Y));
+            friend1friend3chaserdis = Math.Sqrt((friend3X - friend1X) * (friend3X - friend1X) + (friend3Y - friend1Y) * (friend3Y - friend1Y));
 
-            friend2playchaserdis = (playX - friend2X) ^ 2 + (playY - friend2Y) ^ 2;
-            friend2friend1chaserdis = (friend1X - friend2X) ^ 2 + (friend1Y - friend2Y) ^ 2;
-            friend2friend3chaserdis = (friend3X - friend2X) ^ 2 + (friend3Y - friend2Y) ^ 2;
+            friend2playchaserdis = Math.Sqrt((playX - friend2X) * (playX - friend2X) + (playY - friend2Y) * (playY - friend2Y));
+            friend2friend1chaserdis = Math.Sqrt((friend1X - friend2X) * (friend1X - friend2X) + (friend1Y - friend2Y) * (friend1Y - friend2Y));
+            friend2friend3chaserdis = Math.Sqrt((friend3X - friend2X) * (friend3X - friend2X) + (friend3Y - friend2Y) * (friend3Y - friend2Y));
 
-            friend3playchaserdis = (playX - friend3X) ^ 2 + (playY - friend3Y) ^ 2;
-            friend3friend2chaserdis = (friend2X - friend3X) ^ 2 + (friend2Y - friend3Y) ^ 2;
-            friend3friend1chaserdis = (friend1X - friend3X) ^ 2 + (friend1Y - friend3Y) ^ 2;
+            friend3playchaserdis = Math.Sqrt((playX - friend3X) * (playX - friend3X) + (playY - friend3Y) * (playY - friend3Y));
+            friend3friend2chaserdis = Math.Sqrt((friend2X - friend3X) * (friend2X - friend3X) + (friend2Y - friend3Y) * (friend2Y - friend3Y));
+            friend3friend1chaserdis = Math.Sqrt((friend1X - friend3X) * (friend1X - friend3X) + (friend1Y - friend3Y) * (friend1Y - friend3Y));
 
             timer1 = counter / 35;
 
             while (counter3 < 1000)
             {
-                invisLabel.Text = "Welcome to tag! Because you got here last,";
-                invisLabel.Text = "\n you are going to start off as the tagger! You are the red character,";
-                invisLabel.Text = "\n and all the blue characters are the runners! Your objective is to NOT be ";
-                invisLabel.Text = "\n the tagger when the timer runs out! You can transfer being tagger by running";
-                invisLabel.Text = "\n into one of the runners. You have five minutes, GO!!!";
+                invisLabel.Text = "Welcome to tag! Because you got here last, you are going to start off as the tagger! You are the red character, and all the blue characters are the runners! You can transfer being tagger by running into one of the runners. You have five minutes, GO!!!";
+                
+               // invisLabel.Text += "\nYou are the red character, and all the blue characters are the runners!";
+                
+              //  invisLabel.Text += "\nYou can transfer being tagger by running into one of the runners. You have five minutes, GO!!!";
+               
+                Refresh(); 
 
                 counter3++;
             }
-            if (counter3 == 100)
+            if (counter3 == 1000)
             {
                 invisLabel.Text = "";
             }
@@ -331,7 +333,7 @@ namespace Basic_Game_Template
             {
                 // If the player is it
 
-                if (friend1playchaserdis < 50)
+                if (friend1playchaserdis < 75)
                 {
                     if (friend1X > (playX + 50) || friend1X < (playX + 50))
                     {
@@ -360,7 +362,7 @@ namespace Basic_Game_Template
 
                 // If friend2 is it
 
-                if (friend1friend2chaserdis < 50)
+                if (friend1friend2chaserdis < 75)
                 {
                     if (friend1X > (friend2X + 50) || friend1X < (friend2X + 50))
                     {
@@ -388,7 +390,7 @@ namespace Basic_Game_Template
 
                 // If friend3 is it
 
-                if (friend1friend2chaserdis < 50)
+                if (friend1friend2chaserdis < 75)
                 {
                     if (friend1X > (friend3X + 50) || friend1X < (friend3X + 50))
                     {
@@ -520,7 +522,7 @@ namespace Basic_Game_Template
             {
                 // If the player is it
 
-                if (friend2playchaserdis > 50)
+                if (friend2playchaserdis < 75)
                 {
                     if (friend2X > (playX + 50) || friend2X < (playX + 50))
                     {
@@ -548,7 +550,7 @@ namespace Basic_Game_Template
 
                 // If friend1 is it
 
-                if (friend2friend1chaserdis > 50)
+                if (friend2friend1chaserdis < 75)
                 {
                     if (friend2X > (friend1X + 50) || friend2X < (friend1X + 50))
                     {
@@ -576,7 +578,7 @@ namespace Basic_Game_Template
 
                 // If friend3 is it
 
-                if (friend2friend3chaserdis > 50)
+                if (friend2friend3chaserdis < 75)
                 {
                     if (friend2X > (friend3X + 50) || friend2X < (friend3X + 50))
                     {
@@ -610,15 +612,15 @@ namespace Basic_Game_Template
                 friend3friend2subs = (friend2X - friend3X) + (friend2Y - friend3Y);
                 friend3friend1subs = (friend1X - friend3X) + (friend1Y - friend3Y);
 
-                if (friend3playsubs < 0)
+                if (friend3playsubs < 50)
                 {
                     friend3playsubs = friend3playsubs * -1;
                 }
-                if (friend3friend2subs < 0)
+                if (friend3friend2subs < 50)
                 {
                     friend3friend2subs = friend3friend2subs * -1;
                 }
-                if (friend3friend1subs < 0)
+                if (friend3friend1subs < 50)
                 {
                     friend3friend1subs = friend3friend1subs * -1;
                 }
@@ -702,13 +704,12 @@ namespace Basic_Game_Template
                         friend3Y = friend3Y + chaserSpeed;
                     }
                 }
-
             }
             else if (friend3Chaser == false)
             {
                 // If the player is the tagger 
 
-                if (friend3playchaserdis > 50)
+                if (friend3playchaserdis < 75)
                 {
                     if (friend3X > (playX + 50) || friend3X < (playX + 50))
                     {
@@ -736,7 +737,7 @@ namespace Basic_Game_Template
 
                 // If friend1 is the tagger
 
-                if (friend3friend1chaserdis > 50)
+                if (friend3friend1chaserdis < 75)
                 {
                     if (friend3X > (friend1X + 50) || friend3X < (friend1X + 50))
                     {
@@ -764,7 +765,7 @@ namespace Basic_Game_Template
 
                 // If friend2 is the tagger
 
-                if (friend3friend2chaserdis > 50)
+                if (friend3friend2chaserdis < 75)
                 {
                     if (friend3X > (friend2X + 50) || friend3X < (friend2X + 50))
                     {
@@ -839,6 +840,9 @@ namespace Basic_Game_Template
                 playChaser = false;
                 friend1Chaser = true;
                 friend3Chaser = false;
+
+                friend1X = 0;
+                friend1Y = 0;
             }
             else if (playFriend1Collision == true && friend1Chaser == true)
             {
@@ -849,6 +853,9 @@ namespace Basic_Game_Template
 
                 friend2Chaser = false;
                 friend3Chaser = false;
+
+                playX = 0;
+                playY = 0;
             }
 
             // Player and friend2 collisions
@@ -862,6 +869,9 @@ namespace Basic_Game_Template
                 friend1Chaser = false;
                 friend3Chaser = false;
 
+                friend2X = 0;
+                friend2Y = 0;
+
             }
             else if (playFriend2Collision == true && friend2Chaser == true)
             {
@@ -872,6 +882,9 @@ namespace Basic_Game_Template
 
                 friend1Chaser = false;
                 friend3Chaser = false;
+
+                playX = 0;
+                playY = 0;
             }
 
             // Player and friend3 collisions
@@ -885,6 +898,9 @@ namespace Basic_Game_Template
                 friend2Chaser = false;
                 friend1Chaser = false;
 
+                friend3X = 0;
+                friend3Y = 0;
+
             }
             else if (playFriend3Collision == true && friend3Chaser == true)
             {
@@ -895,6 +911,9 @@ namespace Basic_Game_Template
 
                 friend1Chaser = false;
                 friend3Chaser = false;
+
+                playX = 0;
+                playY = 0;
             }
 
             // Friend1 and friend2 collisions
@@ -907,6 +926,10 @@ namespace Basic_Game_Template
 
                 playChaser = false;
                 friend3Chaser = false;
+
+                friend2X = 0;
+                friend2Y = 0;
+
             }
             else if (friend1Friend2Collision == true && friend2Chaser == true)
             {
@@ -916,6 +939,9 @@ namespace Basic_Game_Template
                 friend1Chaser = true;
                 friend2Chaser = false;
                 friend3Chaser = false;
+
+                friend1X = 0;
+                friend1Y = 0;
             }
 
             // Friend1 and friend3 collisions
@@ -928,6 +954,9 @@ namespace Basic_Game_Template
 
                 friend2Chaser = false;
                 playChaser = false;
+
+                friend3X = 0;
+                friend3Y = 0; 
             }
             else if (friend1Friend3Collision == true && friend3Chaser == true)
             {
@@ -938,6 +967,9 @@ namespace Basic_Game_Template
 
                 friend2Chaser = false;
                 playChaser = false;
+
+                friend1X = 0;
+                friend1Y = 0;
             }
 
             // Friend2 and friend3 collisions
@@ -950,6 +982,9 @@ namespace Basic_Game_Template
 
                 friend1Chaser = false;
                 playChaser = false;
+
+                friend3X = 0;
+                friend3Y = 0;
             }
             else if (friend2Friend3Collision == true && friend3Chaser == true)
             {
@@ -960,10 +995,13 @@ namespace Basic_Game_Template
 
                 friend1Chaser = false;
                 playChaser = false;
+
+                friend2X = 0;
+                friend2Y = 0;
             }
 
             //Deciding if the game is over
-            if (timer1 == 300)
+            if (timer1 == 10)
             {
                 if (playChaser =! true)
                 {
@@ -971,11 +1009,15 @@ namespace Basic_Game_Template
                 }
                 if (winVar == true)
                 {
+                    gameTimer.Enabled = false;
                     MainForm.ChangeScreen(this, "WinGameScreen");
+                    return;
                 }
                 else
                 {
+                    gameTimer.Enabled = false;
                     MainForm.ChangeScreen(this, "EndGameScreen");
+                    return;
                 }
             }
            
@@ -1017,7 +1059,7 @@ namespace Basic_Game_Template
             e.Graphics.DrawString("Time Remaining: " + (300 - counter/35), playFont, blackBrush, 100, 20);
 
             //Credits to the makers
-            e.Graphics.DrawString("By: Charlie Kevill and Chris Rouse", playFont, numBrush, (this.Width - 30), (this.Height - 10));
+            e.Graphics.DrawString("By: Charlie Kevill and Chris Rouse", playFont, numBrush, (this.Width - 100), (this.Height - 10));
 
             //Name of the Game
             e.Graphics.DrawString("RUN", playFont, numBrush, 0, 0);
@@ -1035,6 +1077,7 @@ namespace Basic_Game_Template
                 chX = 317;
             }
 
+          
             return chX;
 
 
@@ -1051,7 +1094,7 @@ namespace Basic_Game_Template
             {
                 chY = 295;
             }
-
+           
             return chY;
 
         }

@@ -42,11 +42,11 @@
             // invisLabel
             // 
             this.invisLabel.BackColor = System.Drawing.Color.Transparent;
-            this.invisLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.invisLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.invisLabel.ForeColor = System.Drawing.Color.White;
-            this.invisLabel.Location = new System.Drawing.Point(29, 66);
+            this.invisLabel.Location = new System.Drawing.Point(0, 114);
             this.invisLabel.Name = "invisLabel";
-            this.invisLabel.Size = new System.Drawing.Size(266, 182);
+            this.invisLabel.Size = new System.Drawing.Size(324, 80);
             this.invisLabel.TabIndex = 0;
             this.invisLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
